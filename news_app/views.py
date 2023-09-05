@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, HttpResponse
-from django.views.generic import ListView, DetailView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView, DeleteView, CreateView
 from .models import News, Category
 from .forms import ContactForm
 # Create your views here.
@@ -122,3 +123,13 @@ class TechnologyNewsView(ListView):
         context['categories'] = Category.objects.all()
         context['local_news'] = News.objects.filter(status=News.Status.published).filter(category__name='Texnologiya').order_by('-publish_time')
         return context
+
+class NewsUpdateView(UpdateView):
+    model = News
+    fields = ['title', 'body', 'image', 'category', 'status']
+    template_name = 'crud/update_page.html'
+
+class NewsDeleteView(DeleteView):
+    model = News
+    template_name = 'crud/delete_page.html'
+    success_url = reverse_lazy('index_page')

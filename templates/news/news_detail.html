@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Yangiliklar</title>
-</head>
-<body>
-<h1>{{ news.title }}</h1>
-<p>Sana: {{ news.publish_time }}</p>
-<p>{{ news.body | linebreaks}}</p>
-</body>
-</html>
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %} {{ news.title }} {% endblock title %}
+
+{% block content %}
+
+    <h2>{{ news.title }}</h2>
+    <h5>{{ news.publish_time }}</h5>
+    <img src="{{ news.image.url }}">
+    <p>{{ news.body }}</p>
+
+<div class="card-footer text-center">
+    <a href="{% url 'update_news'  news.slug %}" class="btn-info">Tahrirlash</a>
+    <a href="{% url 'delete_news'  news.slug %}" class="btn-danger">O'chirish</a>
+</div>
+{% endblock content %}
