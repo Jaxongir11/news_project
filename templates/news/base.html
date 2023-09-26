@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,20 +30,36 @@
         <div class="header_top">
           <div class="header_top_left">
             <ul class="top_nav">
-              <li><a href="{% url 'index_page' %}">Bosh sahifa</a></li>
-              <li><a href="{% url 'about_page' %}">Biz haqimizda</a></li>
-              <li><a href="{% url 'contact_page' %}">Aloqa</a></li>
+              <li><a href="{% url 'index_page' %}">{% blocktrans %}Bosh sahifa{% endblocktrans %}</a></li>
+              <li><a href="{% url 'about_page' %}">{% blocktrans %}Biz haqimizda{% endblocktrans %}</a></li>
+              <li><a href="{% url 'contact_page' %}">{% blocktrans %}Aloqa{% endblocktrans %}</a></li>
               {% if user.is_authenticated and user.is_superuser %}
-              <li><a href="{% url 'admin_page' %}">Admin sahifasi</a></li>
+              <li><a href="{% url 'admin_page' %}">{% blocktrans %}Admin sahifasi{% endblocktrans %}</a></li>
               {% endif %}
+            {% load i18n %}
+
+            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Go">
+            </form>
             </ul>
           </div>
           <div class="header_top_right">
             {% if request.user.is_authenticated %}
-              <p><a href="{% url 'logout' %}" style="color: palegreen">Chiqish</a> </p>
-              <p><a href="{% url 'user_profile' %}" style="color: yellow">Mening profilim</a> </p>
+              <p><a href="{% url 'logout' %}" style="color: palegreen">{% blocktrans %}Chiqish{% endblocktrans %}</a> </p>
+              <p><a href="{% url 'user_profile' %}" style="color: yellow">{% blocktrans %}Mening profilim{% endblocktrans %}</a> </p>
             {% else %}
-              <p><a href="{% url 'login' %}" style="color: yellow">Saytga kirish</a> </p>
+              <p><a href="{% url 'login' %}" style="color: yellow">{% blocktrans %}Saytga kirish{% endblocktrans %}</a> </p>
             {% endif %}
             <p>{% now "jS F Y H:i" %}</p>
           </div>

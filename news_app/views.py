@@ -37,14 +37,14 @@ class NewsDetail(DetailView):
             comment_form = CommentForm(request.POST or None)
             if comment_form.is_valid():
                 comment=comment_form.save(commit=False)
-                comment.post=post
+                comment.post = post
                 comment.save()
         else:
             comment_form = CommentForm()
-        context['post']=post.objects.all()
-        context['comments']=comments.objects.all()
-        context['comment_form']=comment_form
-        template_name='news/news_detail.html'
+        context['post'] = post.objects.all()
+        context['comments'] = comments.objects.all()
+        context['comment_form'] = comment_form
+        template_name = 'news/news_detail.html'
         return render(request, template_name, context)
 
 def news_detail(request,slug):
@@ -206,7 +206,9 @@ class NewsDeleteView(OnlyLoggedSuperuser, DeleteView):
 class NewsCreateView(OnlyLoggedSuperuser, CreateView):
     model = News
     template_name = 'crud/create_page.html'
-    fields = ['title', 'slug', 'body', 'image', 'category', 'status']
+    fields = ['title', 'title_uz', 'title_ru', 'title_en',
+              'slug', 'body', 'body_uz', 'body_ru', 'body_en',
+              'image', 'category', 'status']
     def form_valid(self, form):
         self.model = form.save(commit=False)
         if not self.model.slug:
