@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "58ddbea90e422a417741522c4b1dccfd3f2615d65667e2aaa9b67f2ee2759d72"
+            "sha256": "79b6fe3d1d321d9f6654f662283fa7f16d88b08b818bff6f67be86fee6faac04"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -100,6 +100,14 @@
             "index": "pypi",
             "version": "==10.0.1"
         },
+        "python-decouple": {
+            "hashes": [
+                "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f",
+                "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"
+            ],
+            "index": "pypi",
+            "version": "==3.8"
+        },
         "sqlparse": {
             "hashes": [
                 "sha256:5430a4fe2ac7d0f93e66f1efc6e1338a41884b7ddf2a350cedd20ccc4d9d28f3",
@@ -123,6 +131,14 @@
             ],
             "markers": "sys_platform == 'win32'",
             "version": "==2023.3"
+        },
+        "whitenoise": {
+            "hashes": [
+                "sha256:15fe60546ac975b58e357ccaeb165a4ca2d0ab697e48450b8f0307ca368195a8",
+                "sha256:16468e9ad2189f09f4a8c635a9031cc9bb2cdbc8e5e53365407acf99f7ade9ec"
+            ],
+            "index": "pypi",
+            "version": "==6.5.0"
         }
     },
     "develop": {}
